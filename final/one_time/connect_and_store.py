@@ -16,15 +16,15 @@ connectionString = f"""DRIVER={{SQL Server}};
 cnxn = pyodbc.connect(connectionString)
 cursor = cnxn.cursor()
 
-def readReddit() :
-    f = open("reddit.json",encoding = 'utf-8')
+def readReddit():
+    f = open("response.json",encoding = 'utf-8')
     loaded = json.load(f)
     data = loaded["data"]["children"]
     text = map(lambda x: x["data"]["title"], data)
     return text
 
 def readTwitter():
-    f = open("twitter.json",encoding = 'utf-8')
+    f = open("json.json",encoding = 'utf-8')
     loaded = json.load(f)
     data = loaded["data"]
     text = map(lambda x: x["text"], data)

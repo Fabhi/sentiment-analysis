@@ -9,6 +9,7 @@ justAfter = "\s+(\w+(?= )*)"
 query = "I am feeling"
 query2 = "I feel"
 d = getEmotionDict()
+
 def extractNext(text, queryText = query):
     res = []
     matches = re.findall(queryText+justAfter, text)
@@ -44,7 +45,9 @@ def emotionSearch(results):
             result["validity"] = any(a)
         else:
             if candidate in adverbs:
-                nextCandidate = extractNext(result["text"], candidate)[0]["match"]
+                next = extractNext(result["text"], candidate)
+                if next is None : continue
+                nextCandidate = next[0]["match"].lower()
                 a = isEmotion(nextCandidate)
                 if a:
                     result["emotion"] = nextCandidate
