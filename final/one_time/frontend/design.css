@@ -2,6 +2,7 @@ html,
 body {
   background-color: #F6F4F2;
   color: #252423;
+  overflow: hidden;
 }
 
 .body-wrapper {
@@ -10,7 +11,6 @@ body {
   align-items: center;
   position: absolute;
   width: 100%;
-  overflow: hidden;
 }
 
 .animation-wrapper {
@@ -79,5 +79,5 @@ body {
 }
 
 #_message {
-
+  padding-top: 2%;
 }
