@@ -15,10 +15,11 @@ function fitElementToParent(el, padding) {
 }
 
 var advancedStaggeringAnimation = (function () {
-
   var staggerVisualizerEl = document.querySelector('.stagger-visualizer');
   var dotsWrapperEl = staggerVisualizerEl.querySelector('.dots-wrapper');
   var dotsFragment = document.createDocumentFragment();
+
+
   var grid = [20, 10];
   var cell = 55;
   var numberOfElements = grid[0] * grid[1];
@@ -26,21 +27,16 @@ var advancedStaggeringAnimation = (function () {
   var paused = true;
 
   fitElementToParent(staggerVisualizerEl, 0);
-  colors = ["red", "green", "orange", "pink", "blue", "yellow", "purple"]
   for (var i = 0; i < numberOfElements; i++) {
     var dotEl = document.createElement('div');
     dotEl.classList.add('dot');
     dotEl.setAttribute("id", i)
     dotEl.addEventListener("click", function () {
-
-      this.style.background = colors[Math.floor(Math.random() * colors.length)]
-      document.querySelector("#_top").style.background = this.style.background;
       play(this.id);
-
+      updateScreen(this);
     })
     dotsFragment.appendChild(dotEl);
   }
-
   dotsWrapperEl.appendChild(dotsFragment);
 
   // var index = anime.random(0, numberOfElements-1);
@@ -55,14 +51,11 @@ var advancedStaggeringAnimation = (function () {
 
   function play(index) {
 
-    playing = true;
+    paused = false;
     if (animation) animation.pause();
 
     // nextIndex = anime.random(0, numberOfElements-1);
-    animation = anime.timeline({
-      easing: 'easeInOutQuad',
-      // complete: play
-    })
+    animation = anime.timeline({ easing: 'easeInOutQuad', })
       .add({
         targets: '.stagger-visualizer .cursor',
         translateX: { value: anime.stagger(-cell, { grid: grid, from: index, axis: 'x' }) },
@@ -70,38 +63,40 @@ var advancedStaggeringAnimation = (function () {
         scale: 1.5,
         easing: 'cubicBezier(.075, .2, .165, 1)',
 
-      }, "-=100"
-      )
+      }, 1)
       .add({
         targets: '.stagger-visualizer .cursor',
         keyframes: [
           { scale: .75, duration: 120 },
           { scale: 2.5, duration: 220 },
-          { scale: 1.5, duration: 450 },
+          { scale: 1.5, duration: 200 },
         ],
-        duration: 300
+        duration: 100
       })
       .add({
         targets: '.stagger-visualizer .dot',
-        keyframes: [
-          {
-            translateX: anime.stagger('-2px', { grid: grid, from: index, axis: 'x' }),
-            translateY: anime.stagger('-2px', { grid: grid, from: index, axis: 'y' }),
-            duration: 100
-          }, {
-            translateX: anime.stagger('4px', { grid: grid, from: index, axis: 'x' }),
-            translateY: anime.stagger('4px', { grid: grid, from: index, axis: 'y' }),
-            scale: anime.stagger([2.6, 1], { grid: grid, from: index }),
-            duration: 225
-          }, {
-            translateX: 0,
-            translateY: 0,
-            scale: 1,
-            duration: 1200,
-          }
-        ],
-        delay: anime.stagger(80, { grid: grid, from: index })
-      }, 30)
+        keyframes:
+          [
+            {
+              translateX: anime.stagger('-2px', { grid: grid, from: index, axis: 'x' }),
+              translateY: anime.stagger('-2px', { grid: grid, from: index, axis: 'y' }),
+              duration: 100
+            },
+            {
+              translateX: anime.stagger('4px', { grid: grid, from: index, axis: 'x' }),
+              translateY: anime.stagger('4px', { grid: grid, from: index, axis: 'y' }),
+              scale: anime.stagger([2.6, 1], { grid: grid, from: index }),
+              duration: 225
+            },
+            {
+              translateX: 0,
+              translateY: 0,
+              scale: 1,
+              duration: 1200,
+            }
+          ],
+        delay: anime.stagger(100, { grid: grid, from: index })
+      })
 
     // index = nextIndex;
 

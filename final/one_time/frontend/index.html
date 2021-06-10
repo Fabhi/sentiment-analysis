@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+        integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="design.css">
-    
+
     <title> We Feel Fine </title>
 </head>
+
 <body>
-    <div class="ui fluid raised segment" id ="_top">
-        <div class = "ui huge header" id ="_message">
-            <em>"Gonna be a busy day...but I am feeling great! Happy Monday!"</em>
-        </div>
-        <div id="_properties">
-            <b>Emotion Found:</b> Greatness <br>
-            <b>Type of Emotion :</b> Positive<br>
-            <b>Anger :</b> False <br>
-            <b>Anticipation :</b> False <br>
-            <b>Disgust :</b> False <br>
-        </div>
-        <div>
-            <b>Fear :</b> False <br>
-            <b>Joy :</b> True <br>
-            <b>Sadness :</b> False <br>
-            <b>Surprise :</b> False <br>
-            <b>Trust :</b> True
+    <div class="ui fluid raised segment inverted" id="_top">
+        <div class="ui center aligned header">
+            Please select a dot to uncover emotions
         </div>
     </div>
 
@@ -31,12 +21,61 @@
     <div class="body-wrapper">
         <div class="animation-wrapper">
             <div class="stagger-visualizer">
-                <!--     <div class="cursor color-red"></div> -->
+                <div class="cursor color-red"></div>
                 <div class="dots-wrapper"></div>
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script.js" ></script>
+
+    <script type="text/html" id="header_template">
+        <div class="ui big red inverted header" id="_message">
+            <div class="ui sub header" id="someone">
+                Someone on <span id="source"> {{SOURCE}} </span>says:
+            </div>
+            <span id="message">
+                <em>"{{SENTENCE}}"</em>
+            </span>
+        </div>
+        <div class="_properties">
+            <b>Emotion Found:</b> <br>
+            <span id="emotion">{{EMOTION}}</span> <br>
+            <b>Type of Emotion :</b><br>
+            <span id="type">{{TYPE}}</span>
+        </div>
+        <div class="_column">
+            <div class="_row">
+                <b style = "color:#B7001F">Anger : </b> <span id="anger" > {{ANGER}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#F45501">Anticipation :</b> <span id="anticipation">{{ANTICIPATION}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#7e197e">Disgust :</b> <span id="disgust">{{DISGUST}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#509600">Fear :</b> <span id="fear">{{FEAR}}</span>
+            </div>
+        </div>
+        <div class="_column">
+            <div class="_row">
+                <b style = "color:#E7D300">Joy :</b> <span id="joy">{{JOY}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#027ADB">Sadness :</b><span id="sadness">{{SADNESS}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#038025">Surprise :</b><span id="surprise">{{SURPRISE}}</span>
+            </div>
+            <div class="_row">
+                <b style = "color:#9BB700">Trust :</b> <span id="trust">{{TRUST}}</span>
+            </div>
+        </div>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="replacement.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
